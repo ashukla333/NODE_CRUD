@@ -3,7 +3,6 @@ import { task } from "../models/task.js"
 
 export const AddTask = async (req, res) => {
     try {
-
         const { description, title } = req.body
         const tasks = await task.create({ description, title, user: req.user })
         if (description && title) {

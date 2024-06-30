@@ -61,7 +61,6 @@ export const logOutUser = (req, res) => {
 
 export const MyprofileDetail = async (req, res) => {
     try {
-        // const myuser = await users.findOne({ email: req.user })
         if (req.user) {
             return res.status(201).json({
                 status: 201, message: "sucssesfully done", data: {
