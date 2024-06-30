@@ -1,10 +1,24 @@
-import mongoose from "mongoose"
+import mongoose, { Types, now } from "mongoose"
 // schema
 const userSchema = new mongoose.Schema({
-    name: String,
-    email: String,
-    password: String,
-    number: Number,
+    name: {
+        type: String,
+        reduired: true
+    },
+    email: {
+        type: String,
+        reduired: true,
+        unique: true
+    },
+    password: {
+        type: String,
+        select: false
+
+    },
+    createdAT: {
+        type: Date,
+        default: Date.now
+    }
 })
 // modal
 export const users = mongoose.model("users", userSchema)
