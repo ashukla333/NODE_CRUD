@@ -57,12 +57,10 @@ export const logOutUser = (req, res) => {
     } catch (error) {
         console.log(error)
     }
-
 }
 
 export const MyprofileDetail = async (req, res) => {
     try {
-
         // const myuser = await users.findOne({ email: req.user })
         if (req.user) {
             return res.status(201).json({
@@ -71,34 +69,7 @@ export const MyprofileDetail = async (req, res) => {
                 }
             });
         }
-
     } catch (error) {
         console.log(error)
     }
 }
-
-// export const updateUser = async (req, res) => {
-//     try {
-//         const { name, password, email, number } = req.body
-//         if (mongoose.Types.ObjectId.isValid(req.params.id)) {
-//             const updatedCode = await users.findByIdAndUpdate(req.params.id, { name, password, email, number }, { new: true })
-//             res.json({ status: 200, message: "succesfully done", data: { updatedCode }, }).status(201)
-//         } else {
-//             res.json({ status: 200, message: `${req.params.id} id is not match ` }).status(400)
-//         }
-//     } catch (error) {
-//         console.log(error, "f not done yet all")
-//     }
-// }
-// export const deleteUser = async (req, res) => {
-//     try {
-//         if (mongoose.Types.ObjectId.isValid(req.params.id)) {
-//             await users.findByIdAndDelete(req.params.id)
-//             res.json({ status: 200, message: "deleted succesfully " }).status(201)
-//         } else {
-//             res.json({ status: 200, message: `${req.params.id} id is not match ` }).status(400)
-//         }
-//     } catch (error) {
-//         console.log(error, "f not done yet all")
-//     }
-// }

@@ -20,17 +20,11 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    number: {
-        type: Number,
-        reduired: true,
-        unique: true
-
-    },
     createdAT: {
         type: Date,
         default: Date.now
     }
 })
 // modal
-export const users = mongoose.model("task", userSchema)
+export const task = mongoose.model("task", userSchema)
 
