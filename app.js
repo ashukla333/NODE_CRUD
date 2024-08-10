@@ -3,6 +3,7 @@ import userRouter from './routes/user.js'
 import taskRouter from './routes/task.js'
 import brandRouter from './routes/brand.js'
 import categoryRouter from './routes/category.js'
+import productRouter from './routes/product.js'
 import { configDotenv } from 'dotenv';
 import cookieParser from 'cookie-parser'
 import cors from 'cors';
@@ -35,6 +36,7 @@ app.use("/users", userRouter)
 app.use("/task", taskRouter)
 app.use("/v1/brand", brandRouter)
 app.use("/v1/category", categoryRouter)
+app.use("/v1/product", productRouter)
 // 
 
 app.get('/', (req, res) => {
