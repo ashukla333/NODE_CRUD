@@ -107,19 +107,52 @@ export const logOutUser = (req, res) => {
   }
 };
 
+// export const MyprofileDetail = async (req, res) => {
+//   try {
+//     if (req.user) {
+//       const name=users.name
+//       return res.status(201).json({
+//         status: true,
+//         message: "sucssesfully done",
+//         data: {
+//           user: req.user,name
+//         },
+//       });
+//     }
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
 export const MyprofileDetail = async (req, res) => {
   try {
-    if (req.user) {
-      const name=users.name
-      return res.status(201).json({
-        status: true,
-        message: "sucssesfully done",
-        data: {
-          user: req.user,name
-        },
-      });
+    const token = req.cookies.AuthToken || req.headers.authorization?.split(" ")[1];
+
+    if (!token) {
+      return res.status(401).json({ status: false, message: "No token provided" });
     }
+
+    const decoded = jwt.verify(token, process.env.JsonWEBToken); // Ensure JWT_SECRET is your secret key used during token generation
+
+    const user = await users.findOne({ email: decoded.email }); // Use `email` or `id` depending on your token payload structure
+    console.log({user})
+    if (!user) {
+      return res.status(404).json({ status: false, message: "User not found" });
+    }
+
+    return res.status(200).json({
+      status: true,
+      message: "Successfully retrieved user profile details",
+      data: {
+        user,
+        name: user.name, // Directly get the name from the user object
+      },
+    });
   } catch (error) {
     console.log(error);
+    return res.status(500).json({
+      status: false,
+      message: "An error occurred while retrieving profile details",
+    });
   }
 };

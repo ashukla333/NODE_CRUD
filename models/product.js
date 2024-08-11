@@ -10,7 +10,15 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  gender: {
+    type: String,
+    required: true,
+  },
   price: {
+    type: Number,
+    required: true,
+  },
+  offer: {
     type: Number,
     required: true,
   },
@@ -39,6 +47,24 @@ const productSchema = new mongoose.Schema({
       },
     },
   ],
+  ratings: [
+    {
+      user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true,
+      },
+      rating: {
+        type: Number,
+        required: true,
+        min: 1,
+        max: 5,
+      },
+      comment: {
+        type: String,
+      },
+    },
+  ],
   isActive: {
     type: Boolean,
     default: true,
@@ -51,6 +77,18 @@ const productSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+});
+
+productSchema.pre("save", function (next) {
+  if (this.ratings.length > 0) {
+    const sumRatings = this.ratings.reduce((sum, rating) => sum + rating.rating, 0);
+    this.averageRating = sumRatings / this.ratings.length;
+    this.numOfRatings = this.ratings.length;
+  } else {
+    this.averageRating = 0;
+    this.numOfRatings = 0;
+  }
+  next();
 });
 
 export const product = mongoose.model("product", productSchema);

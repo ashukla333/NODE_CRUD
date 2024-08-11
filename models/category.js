@@ -26,6 +26,7 @@ const categoryData = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  
 });
 
 export const category=mongoose.model('category',categoryData)

@@ -19,7 +19,7 @@ export const createCategory = async (req, res) => {
     });
 
     if (categoryData) {
-      res.status(201).json({
+      res.status(200).json({
         status: true,
         message: "Category created sucsessfully!",
         data: { categoryData },
@@ -118,7 +118,7 @@ export const getCategory = async (req, res) => {
     const categorylist = await category.find({});
     // console.log({categorylist})
     if (categorylist) {
-      res.status(201).json({
+      res.status(200).json({
         status: true,
         message: "Category fetched sucsessfully!",
         data: { categorylist },
@@ -156,7 +156,7 @@ export const getCategoryByID = async (req, res) => {
       });
     }
     if (categoryList) {
-      res.status(201).json({
+      res.status(200).json({
         status: true,
         message: "Category fetch sucsessfully!",
         data: { categoryList },
