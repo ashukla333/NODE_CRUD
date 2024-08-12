@@ -2,8 +2,10 @@ import express from 'express';
 import userRouter from './routes/user.js'
 import taskRouter from './routes/task.js'
 import brandRouter from './routes/brand.js'
+import cartRouter from './routes/cart.js'
 import categoryRouter from './routes/category.js'
 import productRouter from './routes/product.js'
+import wishlistRouter from './routes/wishlist.js'
 import { configDotenv } from 'dotenv';
 import cookieParser from 'cookie-parser'
 import cors from 'cors';
@@ -21,14 +23,7 @@ app.use(cors({
 configDotenv({
     path: "./data/config.env"
 })
-
-// // server.js or app.js
-// app.use((req, res, next) => {
-//     res.setHeader('Referrer-Policy', 'no-referrer-when-downgrade');
-//     next();
-//   });
-
-  
+ 
 // using middleware 
 app.use(express.json())
 app.use(cookieParser())
@@ -37,6 +32,8 @@ app.use("/task", taskRouter)
 app.use("/v1/brand", brandRouter)
 app.use("/v1/category", categoryRouter)
 app.use("/v1/product", productRouter)
+app.use("/v1/wishlist", wishlistRouter)
+app.use("/v1/cart",cartRouter)
 // 
 
 app.get('/', (req, res) => {
