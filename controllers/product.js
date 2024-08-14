@@ -3,7 +3,7 @@ import { product } from "../models/product.js";
 export const createProduct = async (req, res) => {
   try {
     const token = req.cookies.AuthToken;
-    const { name, stock, images, brand, category, price,ratings, description,gender,offer } =
+    const { name, stock, images, brand, category, price,ratings, description,gender,offer,sizes } =
       req.body;
     if (!token) {
       res.status(401).json({
@@ -20,7 +20,9 @@ export const createProduct = async (req, res) => {
       price,
       description,
       ratings,
-      gender,offer
+      gender,
+      offer,
+      sizes
     });
     if (productData) {
       res.status(201).json({
@@ -214,7 +216,7 @@ export const deleteProduct = async (req, res) => {
 export const updateProduct = async (req, res) => {
   try {
     const token = req.cookies.AuthToken;
-    const { name, stock, images, brand, category, price,ratings, description ,gender,offer} =
+    const { name, stock, images, brand, category, price,ratings, description ,gender,offer,sizes} =
       req.body;
     const { id } = req.params;
     if (!token) {
@@ -236,6 +238,7 @@ export const updateProduct = async (req, res) => {
     productData.ratings = ratings;
     productData.gender = gender;
     productData.offer = offer;
+    productData.sizes = sizes;
     await productData.save();
 
     if (productData) {

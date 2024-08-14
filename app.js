@@ -6,6 +6,7 @@ import cartRouter from './routes/cart.js'
 import categoryRouter from './routes/category.js'
 import productRouter from './routes/product.js'
 import wishlistRouter from './routes/wishlist.js'
+import orderRouter from './routes/order.js'
 import { configDotenv } from 'dotenv';
 import cookieParser from 'cookie-parser'
 import cors from 'cors';
@@ -34,6 +35,7 @@ app.use("/v1/category", categoryRouter)
 app.use("/v1/product", productRouter)
 app.use("/v1/wishlist", wishlistRouter)
 app.use("/v1/cart",cartRouter)
+app.use("/v1/order",orderRouter)
 // 
 
 app.get('/', (req, res) => {

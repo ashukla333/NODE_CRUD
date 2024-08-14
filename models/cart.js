@@ -10,7 +10,7 @@ const CartItemSchema = new Schema({
   },
   quantity: {
     type: Number,
-    default: 1, // Default to 1 if quantity is not provided
+    default: 0, // Default to 1 if quantity is not provided
   },
   size: {
     type: String, // Adjust as needed based on your size options
