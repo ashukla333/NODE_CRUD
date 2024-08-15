@@ -6,9 +6,9 @@ const router=express.Router()
 
 
 router.post('/createProduct',isAuthenticated,createProduct)
-router.get('/getProduct',isAuthenticated,getProduct)
-router.get('/:id',isAuthenticated,getProductById)
-router.get('/ProductByCategoryId/:id',isAuthenticated,ProductByCategoryId)
+router.get('/getProduct',getProduct)
+router.get('/:id',getProductById)
+router.get('/ProductByCategoryId/:id',ProductByCategoryId)
 router.route('/:id').put(isAuthenticated,updateProduct).delete(isAuthenticated,deleteProduct)
 // router.get("/search",isAuthenticated,getSearch)
 

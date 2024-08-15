@@ -54,12 +54,6 @@ export const createProduct = async (req, res) => {
 export const getProduct = async (req, res) => {
   try {
     const token = req.cookies.AuthToken;
-    if (!token) {
-      res.status(401).json({
-        status: false,
-        message: "login Again Token Expired",
-      });
-    }
     const productData = await product.find({});
     if (productData) {
       res.status(201).json({
@@ -83,12 +77,7 @@ export const getProductById = async (req, res) => {
     const token = req.cookies.AuthToken;
     const { id } = req.params;
 
-    if (!token) {
-      res.status(401).json({
-        status: false,
-        message: "login Again Token Expired",
-      });
-    }
+ 
     if (!id) {
       res.status(401).json({
         status: false,
@@ -119,13 +108,7 @@ export const ProductByCategoryId = async (req, res) => {
     const { id } = req.params;
     const { gender, minPrice, maxPrice, minRating, sortBy } = req.query;
 
-    // Check if the token is present
-    if (!token) {
-      return res.status(401).json({
-        status: false,
-        message: "Login Again. Token Expired",
-      });
-    }
+  
 
     // Check if ID is provided
     if (!id) {
