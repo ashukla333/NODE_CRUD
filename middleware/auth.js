@@ -26,36 +26,29 @@
 // };
 import jwt from "jsonwebtoken";
 import { users } from "../models/user.js";
-
 export const isAuthenticated = async (req, res, next) => {
-    // Extract token from cookies
-    const token = req.cookies.AuthToken;
+    // Extract token from cookies or Authorization header
+    const token = req.cookies.AuthToken || req.headers.authorization?.split(" ")[1];
     console.log("Extracted token:", token);
 
     if (!token) {
-        return res.status(401).json({ status: 401, message: "Please log in again" });
+        return res.status(401).json({ status: false, message: "No token provided" });
     }
 
     try {
-        // Verify the token using the secret key
         const decoded = jwt.verify(token, process.env.JsonWEBToken);
         console.log("Decoded token:", decoded);
 
-        // Find the user by email
-        const user = await users.findOne({ email: decoded.email });
-        console.log("Authenticated user:", user);
+        req.user = await users.findOne({ email: decoded.email });
+        console.log("Authenticated user:", req.user);
 
-        if (!user) {
-            return res.status(401).json({ status: 401, message: "User not found" });
+        if (!req.user) {
+            return res.status(404).json({ status: false, message: "User not found" });
         }
 
-        // Attach user to the request object
-        req.user = user;
-
-        // Proceed to the next middleware or route handler
         next();
     } catch (error) {
         console.error("Authentication error:", error.message);
-        return res.status(401).json({ status: 401, message: "Invalid or expired token" });
+        return res.status(401).json({ status: false, message: "Invalid or expired token" });
     }
 };
