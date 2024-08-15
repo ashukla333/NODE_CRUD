@@ -37,12 +37,6 @@ export const UpdateCategory = async (req, res) => {
     const { isActive, description, categoryName } = req.body;
     console.log({ id });
 
-    if (!token) {
-      res.status(401).json({
-        status: false,
-        message: "login required",
-      });
-    }
 
     if (!id) {
       res.status(402).json({
