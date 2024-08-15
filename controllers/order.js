@@ -76,12 +76,12 @@ export const getOrderByUser = async (req, res) => {
   const token = req.cookies.AuthToken;
   const { id } = req.params;
   try {
-    if (!token) {
-      res.status(401).json({
-        status: false,
-        message: "login required",
-      });
-    }
+    // if (!token) {
+    //   res.status(401).json({
+    //     status: false,
+    //     message: "login required",
+    //   });
+    // }
     if (!id) {
       res.status(402).json({
         status: false,

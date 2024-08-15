@@ -31,12 +31,12 @@ export const getWishlistByProductId = async (req, res) => {
   try {
     const { id } = req.params;
     const token = req.cookies.AuthToken;
-    if (!token) {
-      res.status(401).json({
-        status: false,
-        message: "login required",
-      });
-    }
+    // if (!token) {
+    //   res.status(401).json({
+    //     status: false,
+    //     message: "login required",
+    //   });
+    // }
     const wishlist = await Wishlist.findOne({ user: id });
     if (!wishlist) {
       return res.status(404).json({ message: "Wishlist not found" });

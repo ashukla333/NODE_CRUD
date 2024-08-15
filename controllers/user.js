@@ -100,7 +100,7 @@ export const logOutUser = (req, res) => {
         .status(200)
         .json({ status: 200, message: "Logout sucssesfully done " });
     } else {
-      return res.status(500).json({ status: 500, message: "already logout " });
+      return res.status(200).json({ status: 200, message: "already logout " });
     }
   } catch (error) {
     console.log(error);
