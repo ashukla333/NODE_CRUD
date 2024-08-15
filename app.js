@@ -15,7 +15,7 @@ export const app = express()
 
 app.use(cors({
     
-    origin: 'http://localhost:3000', // Replace with your client URL
+    origin: 'https://kigsvillah.vercel.app', // Replace with your client URL
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,
     allowedHeaders: ['Content-Type', 'Authorization'],
