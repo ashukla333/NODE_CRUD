@@ -5,13 +5,7 @@ export const createCategory = async (req, res) => {
     const token = req.cookies.AuthToken;
     const { isActive, description, categoryName } = req.body;
 
-    if (!token) {
-      res.status(401).json({
-        status: false,
-        message: "login required",
-      });
-    }
-
+   
     const categoryData = await category.create({
       description,
       categoryName,
