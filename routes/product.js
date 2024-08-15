@@ -10,6 +10,7 @@ router.get('/getProduct',isAuthenticated,getProduct)
 router.get('/:id',isAuthenticated,getProductById)
 router.get('/ProductByCategoryId/:id',isAuthenticated,ProductByCategoryId)
 router.route('/:id').put(isAuthenticated,updateProduct).delete(isAuthenticated,deleteProduct)
+// router.get("/search",isAuthenticated,getSearch)
 
 
 

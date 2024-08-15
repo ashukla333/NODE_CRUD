@@ -3,8 +3,19 @@ import { product } from "../models/product.js";
 export const createProduct = async (req, res) => {
   try {
     const token = req.cookies.AuthToken;
-    const { name, stock, images, brand, category, price,ratings, description,gender,offer,sizes } =
-      req.body;
+    const {
+      name,
+      stock,
+      images,
+      brand,
+      category,
+      price,
+      ratings,
+      description,
+      gender,
+      offer,
+      sizes,
+    } = req.body;
     if (!token) {
       res.status(401).json({
         status: false,
@@ -22,7 +33,7 @@ export const createProduct = async (req, res) => {
       ratings,
       gender,
       offer,
-      sizes
+      sizes,
     });
     if (productData) {
       res.status(201).json({
@@ -142,16 +153,20 @@ export const ProductByCategoryId = async (req, res) => {
       if (maxPrice) query.price.$lte = Number(maxPrice);
     }
 
-    // Add star rating filter if provided
     if (minRating) {
-      query["ratings.rating"] = { $gte: Number(minRating) }; // Update to filter ratings
+      const rating = Number(minRating);
+      if (!isNaN(rating)) {
+        query["ratings"] = {
+          $elemMatch: { rating: { $gte: rating } },
+        };
+      }
     }
 
     // Add sorting option if provided
     const sortOptions = {};
     if (sortBy) {
-      const sortDirection = sortBy.startsWith('-') ? -1 : 1;
-      const sortField = sortBy.replace('-', '');
+      const sortDirection = sortBy.startsWith("-") ? -1 : 1;
+      const sortField = sortBy.replace("-", "");
       sortOptions[sortField] = sortDirection;
     }
 
@@ -159,26 +174,25 @@ export const ProductByCategoryId = async (req, res) => {
     const productData = await product.find(query).sort(sortOptions);
 
     if (productData.length > 0) {
-      res.status(200).json({
+      return res.status(200).json({
         status: true,
         message: "Products fetched successfully!",
         data: { productData },
       });
     } else {
-      res.status(404).json({
+      return res.status(404).json({
         status: false,
         message: "No products found!",
       });
     }
   } catch (error) {
     console.error("Error fetching products by category ID:", error);
-    res.status(500).json({
+    return res.status(500).json({
       status: false,
       message: "Server error",
     });
   }
 };
-
 
 export const deleteProduct = async (req, res) => {
   try {
@@ -216,8 +230,19 @@ export const deleteProduct = async (req, res) => {
 export const updateProduct = async (req, res) => {
   try {
     const token = req.cookies.AuthToken;
-    const { name, stock, images, brand, category, price,ratings, description ,gender,offer,sizes} =
-      req.body;
+    const {
+      name,
+      stock,
+      images,
+      brand,
+      category,
+      price,
+      ratings,
+      description,
+      gender,
+      offer,
+      sizes,
+    } = req.body;
     const { id } = req.params;
     if (!token) {
       res.status(401).json({
@@ -256,3 +281,18 @@ export const updateProduct = async (req, res) => {
     console.log(error, "Add Product Error");
   }
 };
+
+// export const searchProducts = async (searchTerm) => {
+//   try {
+//     const products = await product.find({
+//       $or: [
+//         { name: { $regex: searchTerm, $options: 'i' } },
+//         { description: { $regex: searchTerm, $options: 'i' } }
+//       ]
+//     });
+//     return products;
+//   } catch (error) {
+//     console.error('Error searching products:', error);
+//     throw error;
+//   }
+// };

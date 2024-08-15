@@ -9,3 +9,5 @@ export const connectDb = () => {
         console.log(e, "shiit yr nhi connect hua ")
     })
 }
+
+// MONGO_URL=mongodb://localhost:27017
