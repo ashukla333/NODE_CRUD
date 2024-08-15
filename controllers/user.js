@@ -88,24 +88,32 @@ export const loginUser = async (req, res) => {
 
 export const logOutUser = (req, res) => {
   try {
-
-    const  token  = req.cookies.AuthToken;
+    // Check if the AuthToken cookie exists
+    const token = req.cookies.AuthToken;
 
     if (token) {
-      return res
-        .cookie("AuthToken", null, {
-          httpOnly: true,
-          expires: new Date(Date.now()),
-        })
-        .status(200)
-        .json({ status: 200, message: "Logout sucssesfully done " });
+      // Clear the AuthToken cookie by setting it to null and expiring it immediately
+      res.cookie("AuthToken", null, {
+        httpOnly: true,
+        expires: new Date(Date.now()), // Set the cookie to expire immediately
+        sameSite: 'Lax', // Add sameSite attribute for better security
+        secure: process.env.NODE_ENV === 'production', // Use secure flag only in production
+      });
+
+      // Send success response
+      return res.status(200).json({ status: 200, message: "Logout successfully done" });
     } else {
-      return res.status(200).json({ status: 200, message: "already logout " });
+      // If there's no token, it means the user is already logged out
+      return res.status(200).json({ status: 200, message: "Already logged out" });
     }
   } catch (error) {
-    console.log(error);
+    console.error("Logout error:", error.message);
+
+    // Send an error response if something goes wrong
+    return res.status(500).json({ status: 500, message: "Server error during logout" });
   }
 };
+
 
 // export const MyprofileDetail = async (req, res) => {
 //   try {
