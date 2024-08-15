@@ -29,12 +29,7 @@ export const createBrand = async (req, res) => {
 export const getBrand = async (req, res) => {
   try {
     const token = req.cookies.AuthToken;
-    if (!token) {
-      res.status(401).json({
-        status: false,
-        message: "login required",
-      });
-    }
+ 
     const brandlist = await brand.find({});
     // console.log({brandlist})
     if (brandlist) {
@@ -54,12 +49,6 @@ export const getBrandByID = async (req, res) => {
     const token = req.cookies.AuthToken;
     const { id } = req.params;
 
-    if (!token) {
-      res.status(401).json({
-        status: false,
-        message: "login required",
-      });
-    }
 
     if (!id) {
       res.status(402).json({

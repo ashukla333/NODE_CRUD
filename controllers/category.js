@@ -109,12 +109,6 @@ export const DeleteCategory = async (req, res) => {
 export const getCategory = async (req, res) => {
   try {
     const token = req.cookies.AuthToken;
-    if (!token) {
-      res.status(401).json({
-        status: false,
-        message: "login required",
-      });
-    }
     const categorylist = await category.find({});
     // console.log({categorylist})
     if (categorylist) {
@@ -131,15 +125,9 @@ export const getCategory = async (req, res) => {
 
 export const getCategoryByID = async (req, res) => {
   try {
-    const token = req.cookies.AuthToken;
     const { id } = req.params;
 
-    if (!token) {
-      res.status(401).json({
-        status: false,
-        message: "login required",
-      });
-    }
+   
 
     if (!id) {
       res.status(402).json({

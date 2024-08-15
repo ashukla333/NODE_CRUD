@@ -5,8 +5,8 @@ import { createCategory ,UpdateCategory,DeleteCategory,getCategoryByID,getCatego
 const router=express.Router()
 
 router.post('/createCategory',isAuthenticated,createCategory)
-router.get('/getCategory',isAuthenticated,getCategory)
-router.get('/getCategoryByID/:id',isAuthenticated,getCategoryByID)
+router.get('/getCategory',getCategory)
+router.get('/getCategoryByID/:id',getCategoryByID)
 router.route('/:id').put(isAuthenticated,UpdateCategory).delete(isAuthenticated,DeleteCategory)
 
 
