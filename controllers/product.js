@@ -16,12 +16,12 @@ export const createProduct = async (req, res) => {
       offer,
       sizes,
     } = req.body;
-    if (!token) {
-      res.status(401).json({
-        status: false,
-        message: "login Again Token Expired",
-      });
-    }
+    // if (!token) {
+    //   res.status(401).json({
+    //     status: false,
+    //     message: "login Again Token Expired",
+    //   });
+    // }
     const productData = await product.create({
       name,
       stock,
