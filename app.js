@@ -15,7 +15,7 @@ export const app = express();
 
 app.use(
   cors({
-    origin: ["https://kigsvillah.vercel.app", "http://localhost:300"],
+    origin: ["https://kigsvillah.vercel.app", "http://localhost:3000"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"],
