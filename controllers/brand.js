@@ -5,12 +5,12 @@ export const createBrand = async (req, res) => {
     const token = req.cookies.AuthToken;
     const { logoUrl, brandName, isActive } = req.body;
 
-    if (!token) {
-      res.status(401).json({
-        status: false,
-        message: "login required",
-      });
-    }
+    // if (!token) {
+    //   res.status(401).json({
+    //     status: false,
+    //     message: "login required",
+    //   });
+    // }
 
     const brandData = await brand.create({ logoUrl, brandName, isActive });
 
@@ -78,12 +78,12 @@ export const updateBrandById = async (req, res) => {
     const { logoUrl, brandName, isActive } = req.body;
     console.log({ id });
 
-    if (!token) {
-      res.status(401).json({
-        status: false,
-        message: "login required",
-      });
-    }
+    // if (!token) {
+    //   res.status(401).json({
+    //     status: false,
+    //     message: "login required",
+    //   });
+    // }
 
     if (!id) {
       res.status(402).json({
@@ -118,12 +118,12 @@ export const deleteBrand = async (req, res) => {
   try {
     const token = req.cookies.AuthToken;
     const { id } = req.params;
-    if (!token) {
-      res.status(401).json({
-        status: false,
-        message: "login required",
-      });
-    }
+    // if (!token) {
+    //   res.status(401).json({
+    //     status: false,
+    //     message: "login required",
+    //   });
+    // }
     if (!id) {
       res.status(402).json({
         status: false,

@@ -182,12 +182,12 @@ export const deleteProduct = async (req, res) => {
     const token = req.cookies.AuthToken;
     const { id } = req.params;
 
-    if (!token) {
-      res.status(401).json({
-        status: false,
-        message: "login Again Token Expired",
-      });
-    }
+    // if (!token) {
+    //   res.status(401).json({
+    //     status: false,
+    //     message: "login Again Token Expired",
+    //   });
+    // }
     if (!id) {
       res.status(401).json({
         status: false,
@@ -227,12 +227,12 @@ export const updateProduct = async (req, res) => {
       sizes,
     } = req.body;
     const { id } = req.params;
-    if (!token) {
-      res.status(401).json({
-        status: false,
-        message: "login Again Token Expired",
-      });
-    }
+    // if (!token) {
+    //   res.status(401).json({
+    //     status: false,
+    //     message: "login Again Token Expired",
+    //   });
+    // }
     const productData = await product.findByIdAndUpdate({
       _id: id,
     });
