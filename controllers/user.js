@@ -57,7 +57,7 @@ export const loginUser = async (req, res) => {
     const { email, password } = req.body;
     const emailVerify = await users.findOne({ email }).select("+password");
     if (!emailVerify) {
-      return res.status(404).json({ status: 404, message: "Email not found" });
+      return res.status(404).json({ status:false, message: "Email not found" });
     }
     const passwordVerify = await bcrypt.compare(password, emailVerify.password);
     if (!passwordVerify) {
@@ -82,7 +82,7 @@ export const loginUser = async (req, res) => {
     // sendCokie(emailVerify, res, `Welcome Back ${emailVerify.username}`)
   } catch (error) {
     console.log(error, "Error, please check again");
-    return res.status(500).json({ status: 500, message: "Server error" });
+    return res.status(500).json({ status: false, message: "Server error" });
   }
 };
 
@@ -104,13 +104,13 @@ export const logOutUser = (req, res) => {
       return res.status(200).json({ status: 200, message: "Logout successfully done" });
     } else {
       // If there's no token, it means the user is already logged out
-      return res.status(200).json({ status: 200, message: "Already logged out" });
+      return res.status(200).json({ status: 200, message: " logged out successfully" });
     }
   } catch (error) {
     console.error("Logout error:", error.message);
 
     // Send an error response if something goes wrong
-    return res.status(500).json({ status: 500, message: "Server error during logout" });
+    return res.status(500).json({ status: false, message: "Server error during logout" });
   }
 };
 
@@ -153,7 +153,7 @@ export const MyprofileDetail = async (req, res) => {
       message: "Successfully retrieved user profile details",
       data: {
         user,
-        name: user.name, // Directly get the name from the user object
+        name: users.name, // Directly get the name from the user object
       },
     });
   } catch (error) {
