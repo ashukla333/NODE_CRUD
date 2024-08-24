@@ -112,7 +112,7 @@ export const ProductByCategoryId = async (req, res) => {
 
     // Check if ID is provided
     if (!id) {
-      return res.status(400).json({
+      return res.status(200).json({
         status: false,
         message: "ID is required",
       });
@@ -163,7 +163,7 @@ export const ProductByCategoryId = async (req, res) => {
         data: { productData },
       });
     } else {
-      return res.status(404).json({
+      return res.status(200).json({
         status: false,
         message: "No products found!",
       });

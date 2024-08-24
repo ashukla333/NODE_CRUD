@@ -113,7 +113,7 @@ export const getCategoryByID = async (req, res) => {
    
 
     if (!id) {
-      res.status(402).json({
+      res.status(200).json({
         status: false,
         message: "your id is not correct",
       });
@@ -121,7 +121,7 @@ export const getCategoryByID = async (req, res) => {
 
     const categoryList = await category.findById({ _id: id });
     if (!categoryList) {
-      res.status(402).json({
+      res.status(200).json({
         status: false,
         message: "your id is not correct",
       });
