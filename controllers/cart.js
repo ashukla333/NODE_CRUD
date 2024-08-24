@@ -6,12 +6,12 @@ export const createCart = async (req, res) => {
   try {
     if (!userId) {
       return res
-        .status(400)
+        .status(200)
         .json({ success: false, message: "User ID is required" });
     }
     if (!productId || !size) {
       return res
-        .status(400)
+        .status(200)
         .json({ success: false, message: "Product ID and size are required" });
     }
 
