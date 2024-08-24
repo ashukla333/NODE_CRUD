@@ -57,12 +57,12 @@ export const loginUser = async (req, res) => {
     const { email, password } = req.body;
     const emailVerify = await users.findOne({ email }).select("+password");
     if (!emailVerify) {
-      return res.status(401).json({ status:false, message: "Invalid email " });
+      return res.status(200).json({ status:false, message: "Invalid email " });
     }
     const passwordVerify = await bcrypt.compare(password, emailVerify.password);
     if (!passwordVerify) {
       return res
-        .status(401)
+        .status(200)
         .json({ status: false, message: "Invalid  password" });
     }
     const token = generateCookie(emailVerify?.email, res);
