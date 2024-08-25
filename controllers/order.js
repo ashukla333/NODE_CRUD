@@ -4,7 +4,6 @@ import Razorpay from "razorpay";
 import crypto from "crypto";
 import { Cart } from "../models/cart.js";
 
-
 export const ProcessOrder = async (req, res) => {
   const { cartItems } = req.body;
 
@@ -139,12 +138,12 @@ export const placeOrder = async (req, res) => {
     });
 
     const savedOrder = await order.save();
-      // Clear the cart after placing the order
-      await Cart.findOneAndUpdate(
-        { userId: req.user._id },
-        { $set: { items: [] } },  // Clear the cart items
-        { new: true }
-      );
+    // Clear the cart after placing the order
+    await Cart.findOneAndUpdate(
+      { userId: req.user._id },
+      { $set: { items: [] } }, // Clear the cart items
+      { new: true }
+    );
 
     // Respond with the saved order and Razorpay order ID
     res.status(201).json({
@@ -196,8 +195,11 @@ export const verifyPayment = async (req, res) => {
       .digest("hex");
 
     console.log("Generated Signature:", generatedSignature);
-    console.log(process.env.RAZORPAY_KEY_SECRET,"process.env.RAZORPAY_KEY_SECRET");
-    
+    console.log(
+      process.env.RAZORPAY_KEY_SECRET,
+      "process.env.RAZORPAY_KEY_SECRET"
+    );
+
     if (generatedSignature === signature) {
       // Payment verified successfully
       res
@@ -214,6 +216,39 @@ export const verifyPayment = async (req, res) => {
     res.status(500).json({
       status: false,
       message: "An error occurred during payment verification.",
+    });
+  }
+};
+
+export const DeleteOrder = async (req, res) => {
+  const { id } = req.params;
+  try {
+    if (!id) {
+      res.status(200).json({
+        status: false,
+        message: "order id is required",
+      });
+      if (id) {
+        const deleteOrder = await Order.findByIdAndDelete({ _id: id });
+        console.log({ deleteOrder });
+        if (deleteOrder) {
+          res.status(200).json({
+            status: true,
+            message: `order id ${id} Deleted sucsessfully`,
+          });
+        } else {
+          res.status(200).json({
+            status: false,
+            message: `order id ${id} not found`,
+          });
+        }
+      }
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      status: false,
+      message: "internal server error",
     });
   }
 };
