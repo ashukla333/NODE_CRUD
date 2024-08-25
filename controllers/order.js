@@ -222,33 +222,36 @@ export const verifyPayment = async (req, res) => {
 
 export const DeleteOrder = async (req, res) => {
   const { id } = req.params;
+
   try {
+    // Check if the ID is provided
     if (!id) {
-      res.status(200).json({
+      return res.status(200).json({
         status: false,
-        message: "order id is required",
+        message: "Order ID is required",
       });
-      if (id) {
-        const deleteOrder = await Order.findByIdAndDelete({ _id: id });
-        console.log({ deleteOrder });
-        if (deleteOrder) {
-          res.status(200).json({
-            status: true,
-            message: `order id ${id} Deleted sucsessfully`,
-          });
-        } else {
-          res.status(200).json({
-            status: false,
-            message: `order id ${id} not found`,
-          });
-        }
-      }
+    }
+
+    // Attempt to delete the order
+    const deletedOrder = await Order.findByIdAndDelete(id);
+
+    if (deletedOrder) {
+      return res.status(200).json({
+        status: true,
+        message: `Order ID ${id} deleted successfully`,
+      });
+    } else {
+      return res.status(200).json({
+        status: false,
+        message: `Order ID ${id} not found`,
+      });
     }
   } catch (error) {
-    console.log(error);
-    res.status(500).json({
+    console.error(error);
+    return res.status(500).json({
       status: false,
-      message: "internal server error",
+      message: "Internal server error",
     });
   }
 };
+
