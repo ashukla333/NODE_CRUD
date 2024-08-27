@@ -41,7 +41,7 @@ export const createProduct = async (req, res) => {
         message: "Product Add sucsessfully!",
       });
     } else {
-      res.status(402).json({
+      res.status(200).json({
         status: false,
         message: "Product not Add sucsessfully!",
       });
@@ -62,7 +62,7 @@ export const getProduct = async (req, res) => {
         data: { productData },
       });
     } else {
-      res.status(402).json({
+      res.status(200).json({
         status: false,
         message: "Product not fetched sucsessfully!",
       });
@@ -79,7 +79,7 @@ export const getProductById = async (req, res) => {
 
  
     if (!id) {
-      res.status(401).json({
+      res.status(200).json({
         status: false,
         message: "id is required",
       });
@@ -92,7 +92,7 @@ export const getProductById = async (req, res) => {
         data: { productData },
       });
     } else {
-      res.status(402).json({
+      res.status(200).json({
         status: false,
         message: "Product not fetched sucsessfully!",
       });
@@ -189,7 +189,7 @@ export const deleteProduct = async (req, res) => {
     //   });
     // }
     if (!id) {
-      res.status(401).json({
+      res.status(200).json({
         status: false,
         message: "id is required",
       });
@@ -201,7 +201,7 @@ export const deleteProduct = async (req, res) => {
         message: "Product Deleted sucsessfully!",
       });
     } else {
-      res.status(402).json({
+      res.status(200).json({
         status: false,
         message: "Product not found or alredy deleted sucsessfully!",
       });
@@ -255,7 +255,7 @@ export const updateProduct = async (req, res) => {
         message: "Product Updated sucsessfully!",
       });
     } else {
-      res.status(402).json({
+      res.status(200).json({
         status: false,
         message: "Product not Updated sucsessfully!",
       });

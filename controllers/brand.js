@@ -51,7 +51,7 @@ export const getBrandByID = async (req, res) => {
 
 
     if (!id) {
-      res.status(402).json({
+      res.status(200).json({
         status: false,
         message: "your id is not correct",
       });
@@ -86,7 +86,7 @@ export const updateBrandById = async (req, res) => {
     // }
 
     if (!id) {
-      res.status(402).json({
+      res.status(200).json({
         status: false,
         message: "your id is not correct",
       });
@@ -104,7 +104,7 @@ export const updateBrandById = async (req, res) => {
         message: "Brand updated sucsessfully",
       });
     } else {
-      res.status(402).json({
+      res.status(200).json({
         status: false,
         message: "Brand not updated sucsessfully",
       });
@@ -125,7 +125,7 @@ export const deleteBrand = async (req, res) => {
     //   });
     // }
     if (!id) {
-      res.status(402).json({
+      res.status(200).json({
         status: false,
         message: "your id is not correct",
       });
@@ -137,7 +137,7 @@ export const deleteBrand = async (req, res) => {
         message: "Brand Deleted sucsessfully",
       });
     } else {
-      res.status(402).json({
+      res.status(200).json({
         status: false,
         message: "Brand not deleted sucsessfully",
       });

@@ -53,7 +53,7 @@ export const getCartById = async (req, res) => {
 
     if (!cart) {
       return res
-        .status(404)
+        .status(200)
         .json({ success: false, message: "Cart not found" });
     }
 
@@ -76,7 +76,7 @@ export const removeCart = async (req, res) => {
     const cart = await Cart.findOne({ userId });
 
     if (!cart) {
-      return res.status(404).json({ status: false, message: "Cart not found" });
+      return res.status(200).json({ status: false, message: "Cart not found" });
     }
 
     // Find the index of the item to remove
@@ -86,7 +86,7 @@ export const removeCart = async (req, res) => {
 
     if (itemIndex === -1) {
       return res
-        .status(404)
+        .status(200)
         .json({ status: false, message: "Item not found in cart" });
     }
 
@@ -116,7 +116,7 @@ export const getCartData = async (req, res) => {
   
       if (!cart) {
         return res
-          .status(404)
+          .status(200)
           .json({ status: false, message: "Cart not found" });
       }
 

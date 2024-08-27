@@ -33,7 +33,7 @@ export const UpdateCategory = async (req, res) => {
 
 
     if (!id) {
-      res.status(402).json({
+      res.status(200).json({
         status: false,
         message: "your id is not correct",
       });
@@ -51,7 +51,7 @@ export const UpdateCategory = async (req, res) => {
         message: "Category updated sucsessfully",
       });
     } else {
-      res.status(402).json({
+      res.status(200).json({
         status: false,
         message: "Category not updated sucsessfully",
       });
@@ -67,7 +67,7 @@ export const DeleteCategory = async (req, res) => {
     const { id } = req.params;
   
     if (!id) {
-      res.status(402).json({
+      res.status(200).json({
         status: false,
         message: "your id is not correct",
       });
@@ -79,7 +79,7 @@ export const DeleteCategory = async (req, res) => {
         message: "Category Deleted sucsessfully",
       });
     } else {
-      res.status(402).json({
+      res.status(200).json({
         status: false,
         message: "Category not deleted sucsessfully",
       });
@@ -133,7 +133,7 @@ export const getCategoryByID = async (req, res) => {
         data: { categoryList },
       });
     } else {
-      res.status(500).json({
+      res.status(200).json({
         status: false,
         message: "internal server error ",
       });

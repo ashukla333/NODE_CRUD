@@ -137,7 +137,7 @@ export const MyprofileDetail = async (req, res) => {
     const token = req.cookies.AuthToken || req.headers.authorization?.split(" ")[1];
 
     if (!token) {
-      return res.status(401).json({ status: false, message: "No token provided" });
+      return res.status(200).json({ status: false, message: "No token provided" });
     }
 
     const decoded = jwt.verify(token, process.env.JsonWEBToken); // Ensure JWT_SECRET is your secret key used during token generation
@@ -145,7 +145,7 @@ export const MyprofileDetail = async (req, res) => {
     const user = await users.findOne({ email: decoded.email }); // Use `email` or `id` depending on your token payload structure
     console.log({user})
     if (!user) {
-      return res.status(404).json({ status: false, message: "User not found" });
+      return res.status(200).json({ status: false, message: "User not found" });
     }
 
     return res.status(200).json({
