@@ -32,7 +32,7 @@ export const isAuthenticated = async (req, res, next) => {
     console.log("Extracted token:", token);
 
     if (!token) {
-        return res.status(401).json({ status: false, message: "No token provided" });
+        return res.status(200).json({ status: false, message: "No token provided" });
     }
 
     try {
@@ -43,12 +43,12 @@ export const isAuthenticated = async (req, res, next) => {
         console.log("Authenticated user:", req.user);
 
         if (!req.user) {
-            return res.status(404).json({ status: false, message: "User not found" });
+            return res.status(200).json({ status: false, message: "User not found" });
         }
 
         next();
     } catch (error) {
         console.error("Authentication error:", error.message);
-        return res.status(401).json({ status: false, message: "Invalid or expired token" });
+        return res.status(200).json({ status: false, message: "Invalid or expired token" });
     }
 };
